@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OctoPI Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>OctoPI Admin</h1>
+    <p> Created by Christopher Mahoney </p>
+    <a href="https://github.com/Alextopher/octopi-users">Source Code</a>
+
+    <h2>Create a new user</h2>
+    <form action="/create" method="POST">
+        <label for="year">Year</label>
+        <select name="year" id="year">
+            <option value="">none</option>
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username">
+        <br>
+        <label for="password">Password</label>
+        <input type="text" name="password" id="password">
+        <br>
+        <label for="admin">Is Admin</label>
+        <input type="checkbox" name="admin" id="admin">
+        <br>
+        <input type="submit" name="create" value="Create User">
+    </form>
+
+    <h2>Bulk create users</h2>
+    <form action="/bulk" method="POST">
+        <label for="year">Year</label>
+        <select name="year" id="year">
+            <option value="">none</option>
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="password">Password</label>
+        <input type="text" name="password" id="password">
+        <br>
+        <label for="usernames">Usernames (comma separated)</label>
+        <br>
+        <textarea name="usernames" id="usernames" cols="30" rows="10"></textarea>
+        <br>
+        <input type="submit" name="bulk" value="Create Users">
+    </form>
+
+
+    <h2>Mass Delete</h2>
+    <form action="/massdelete" method="POST">
+        <label for="year">Year</label>
+        <select name="year" id="year">
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" name="massdelete" value="Delete Users">
+    </form>
+
+    <h2>Users</h2>
+    <p>Reset Password changes the password to 'changeme'</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Groups</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>
+                    {{ user.groups|join(', ') }}
+                </td>
+                <td>
+                    <form action="/reset" method="POST">
+                        <input type="hidden" name="username" value="{{ user.name }}">
+                        <input type="submit" name="reset" value="Reset Password">
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete" method="POST">
+                        <input type="hidden" name="username" value="{{ user.name }}">
+                        <input type="submit" name="delete" value="Delete User">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>

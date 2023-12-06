@@ -1,0 +1,41 @@
+/* Supper basic dark theme */
+body {
+    background-color: #222;
+    color: #fff;
+}
+
+a {
+    color: #00ffff;
+}
+
+a:hover {
+    color: #00ff00;
+}
+
+/* form elements */
+input[type=text],
+input[type=password],
+input[type=submit],
+input[type=button],
+select,
+textarea {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #777;
+}
+
+/* Bold labels */
+label {
+    font-weight: bold;
+}
+
+/* left-align table headers */
+th {
+    text-align: left;
+}
+
+/* add a bit more space */
+td,
+th {
+    padding-right: 1em;
+}
