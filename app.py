@@ -49,7 +49,6 @@ def index():
     return render_template("index.html", users=users, years=years)
 
 
-# Static files
 @app.route("/static/<path:path>")
 def static_files(path):
     return app.send_static_file(path)
