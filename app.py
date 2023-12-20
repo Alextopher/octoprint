@@ -45,7 +45,7 @@ def index():
 
     # sort users by admin/co## groups, then by username
     users = sorted(users, key=lambda user: (get_important_group(user), user["name"]))
-    years = ["co" + str(i) for i in range(27, 41)]
+    years = ["co" + str(i) for i in range(24, 30)]
     return render_template("index.html", users=users, years=years)
 
 
